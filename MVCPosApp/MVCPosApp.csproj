@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{88DB7F21-DDA1-4E85-B7E4-1C79AD572D3B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVCPosApp</RootNamespace>
+    <AssemblyName>MVCPosApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.WebForms.12.0.2402.15\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PXLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BusinessLogic\bin\PXLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="css\bootstrap-select.min.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\buttonCss.css" />
+    <Content Include="css\css.css" />
+    <Content Include="css\dataTables.bootstrap.min.css" />
+    <Content Include="css\dataTables.bootstrap4.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\FrmCss.css" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="css\jquery.timepicker.min.css" />
+    <Content Include="css\jquery.ui.all.css" />
+    <Content Include="css\login_signup.css" />
+    <Content Include="css\owl.carousel.min.css" />
+    <Content Include="css\select2.min.css" />
+    <Content Include="css\sidebar-menu.css" />
+    <Content Include="css\side_menu.css" />
+    <Content Include="css\site.css" />
+    <Content Include="EmpImage\default.png" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="FrontEnd\Calender\js\calendar.js" />
+    <Content Include="FrontEnd\Calender\js\calendar.min.js" />
+    <Content Include="FrontEnd\CustomDesign\button.css" />
+    <Content Include="FrontEnd\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="FrontEnd\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="FrontEnd\jquery.timepicker.min.js" />
+    <Content Include="FrontEnd\New Calender\css\base.css" />
+    <Content Include="FrontEnd\New Calender\css\tempusdominus-bootstrap.css" />
+    <Content Include="FrontEnd\New Calender\js\base.js" />
+    <Content Include="FrontEnd\New Calender\js\tempusdominus-bootstrap.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\css\buttons.bootstrap4.css" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\css\buttons.bootstrap4.min.css" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.bootstrap4.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.bootstrap4.min.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.colVis.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.colVis.min.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.flash.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.flash.min.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.html5.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.html5.min.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.print.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\buttons.print.min.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\dataTables.buttons.js" />
+    <Content Include="FrontEnd\plugins\datatables-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="FrontEnd\plugins\dataTables.editor.min.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\LICENSE.txt" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales-all.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales-all.min.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\af.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar-dz.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar-kw.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar-ly.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar-ma.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar-sa.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar-tn.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ar.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\az.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\bg.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\bs.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ca.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\cs.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\da.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\de.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\el.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\en-au.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\en-gb.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\en-nz.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\es-us.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\es.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\et.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\eu.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\fa.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\fi.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\fr-ca.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\fr-ch.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\fr.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\gl.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\he.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\hi.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\hr.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\hu.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\id.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\is.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\it.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ja.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ka.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\kk.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ko.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\lb.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\lt.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\lv.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\mk.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ms.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\nb.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\nl.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\nn.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\pl.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\pt-br.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\pt.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ro.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ru.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\sk.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\sl.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\sq.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\sr-cyrl.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\sr.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\sv.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\th.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\tr.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\ug.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\uk.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\uz.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\vi.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\zh-cn.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\locales\zh-tw.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\main.css" />
+    <Content Include="FrontEnd\plugins\fullcalendar\main.esm.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\main.js" />
+    <Content Include="FrontEnd\plugins\fullcalendar\main.min.css" />
+    <Content Include="FrontEnd\plugins\fullcalendar\main.min.js" />
+    <Content Include="FrontEnd\TabDesign\tabmenu.css" />
+    <Content Include="FrontEnd\TabDesign\tabmenu.js" />
+    <Content Include="Global.asax" />
+    <Content Include="images\background.png" />
+    <Content Include="images\background2.jpg" />
+    <Content Include="images\background3.jpg" />
+    <Content Include="images\background4.jpg" />
+    <Content Include="images\background5.png" />
+    <Content Include="images\background6.jpg" />
+    <Content Include="images\background7.jpg" />
+    <Content Include="images\background8.jpg" />
+    <Content Include="images\CoIcon.ico" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\gifloading2.gif" />
+    <Content Include="images\gifloading3.gif" />
+    <Content Include="images\gifloading4.gif" />
+    <Content Include="images\gifloading5.gif" />
+    <Content Include="images\giphy.gif" />
+    <Content Include="images\images.png" />
+    <Content Include="LoginDesign\css\style.css" />
+    <Content Include="LoginDesign\img\avatar.svg" />
+    <Content Include="LoginDesign\img\avater2nd.svg" />
+    <Content Include="LoginDesign\img\bg.svg" />
+    <Content Include="LoginDesign\img\GCTL-LOGO-2020.png" />
+    <Content Include="LoginDesign\img\Infosys Logo 2020-01.png" />
+    <Content Include="LoginDesign\img\Logo.svg" />
+    <Content Include="LoginDesign\img\wave.png" />
+    <Content Include="LoginDesign\js\main.js" />
+    <Content Include="ReportViewer\WbFromReportViwer.aspx" />
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="scripts\bootstrap-datetimepicker.js" />
+    <Content Include="scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="scripts\bootstrap-select.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\calendar.js" />
+    <Content Include="scripts\CustomJavaScript.js" />
+    <Content Include="scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="FrontEnd\plugins\fullcalendar\main.js.map" />
+    <None Include="scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="scripts\jquery-1.9.0.js" />
+    <Content Include="scripts\jquery-1.9.0.min.js" />
+    <Content Include="scripts\jquery-3.3.1.js" />
+    <Content Include="scripts\jquery-ui.js" />
+    <Content Include="scripts\jquery-ui.min.js" />
+    <Content Include="scripts\jquery.dataTables.min.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\jquery.timepicker.min.js" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
+    <Content Include="scripts\notify.min.js" />
+    <Content Include="scripts\npm.js" />
+    <Content Include="scripts\owl.carousel.min.js" />
+    <Content Include="scripts\select2.min.js" />
+    <Content Include="scripts\umd\popper.min.js" />
+    <Content Include="scripts\sidebar-menu.js" />
+    <Content Include="Service\SrvGeneral.asmx" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccessCodeController.cs" />
+    <Compile Include="Controllers\AllAttenReController.cs" />
+    <Compile Include="Controllers\CompanyWeekendController.cs" />
+    <Compile Include="Controllers\EmployeeRosterStatusController.cs" />
+    <Compile Include="Controllers\LeaveApprovalController.cs" />
+    <Compile Include="Controllers\LeaveTypeController.cs" />
+    <Compile Include="Controllers\LeaveApplyController.cs" />
+    <Compile Include="Controllers\PartialTopButtonController.cs" />
+    <Compile Include="Controllers\RosterScheduleEntryController.cs" />
+    <Compile Include="Controllers\SpecialWeekendController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\UserAccessController.cs" />
+    <Compile Include="Controllers\EmpMovementController.cs" />
+    <Compile Include="Controllers\AttendenceDetailsController.cs" />
+    <Compile Include="Controllers\AttendenceTypeController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\DaillyAttendenceController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DesignationController.cs" />
+    <Compile Include="Controllers\EmployeeOfficialController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HolidayController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManualAttendenceController.cs" />
+    <Compile Include="Controllers\PartialMenuController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Rpt_EmpMovement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_EmpMovement.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Rpt_DailAttendenceAll.cs">
+      <DependentUpon>Rpt_DailAttendenceAll.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Rpt_DailyPresentList.cs">
+      <DependentUpon>Rpt_DailyPresentList.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Rpt_DailyLateList.cs">
+      <DependentUpon>Rpt_DailyLateList.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Rpt_DailyAbsentList.cs">
+      <DependentUpon>Rpt_DailyAbsentList.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Rpt_EmployeeAttendenceSummery.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_EmployeeAttendenceSummery.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportViewer\WbFromReportViwer.aspx.cs">
+      <DependentUpon>WbFromReportViwer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewer\WbFromReportViwer.aspx.designer.cs">
+      <DependentUpon>WbFromReportViwer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\SrvGeneral.asmx.cs">
+      <DependentUpon>SrvGeneral.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_MasterLayout.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Views\PartialMenu\showMenu.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ManualAttendence\View_ManualAttendence.cshtml" />
+    <Content Include="Views\AttendenceDetails\View_AttendenceDetails.cshtml" />
+    <Content Include="Views\DaillyAttendence\View_DailyAttendence.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\AddOrEditEmployee.cshtml" />
+    <Content Include="Views\EmployeeOfficial\Index.cshtml" />
+    <Content Include="Views\EmployeeOfficial\AddOrEditEmployee.cshtml" />
+    <Content Include="Views\Company\View_Company.cshtml" />
+    <Content Include="Views\Department\View_Department.cshtml" />
+    <Content Include="Views\Designation\View_Designation.cshtml" />
+    <Content Include="Views\AttendenceType\AddOrEdit.cshtml" />
+    <Content Include="Views\Shift\Vw_Shift.cshtml" />
+    <Content Include="Views\Holiday\Vew_Holiday.cshtml" />
+    <Content Include="Views\EmpMovement\View_empMovement.cshtml" />
+    <Content Include="Views\UserAccess\View_Useracess.cshtml" />
+    <Content Include="Views\AccessCode\View_AccessCode.cshtml" />
+    <Content Include="Views\UserInfo\View_Useracess.cshtml" />
+    <Content Include="Views\AllAttenRe\View_AllAttenReport.cshtml" />
+    <Content Include="Views\LeaveType\Vew_LeaveType.cshtml" />
+    <Content Include="Views\LeaveApply\View_Leave.cshtml" />
+    <Content Include="Views\Dashboard\AdminIndex.cshtml" />
+    <Content Include="Views\RosterScheduleEntry\View_RosterScheduleEntry.cshtml" />
+    <Content Include="Views\CompanyWeekend\View_CompanyWeekend.cshtml" />
+    <Content Include="Views\PartialTopButton\View_PartialTopButton.cshtml" />
+    <None Include="Properties\PublishProfiles\AttendenceMVC.pubxml" />
+    <Content Include="Views\LeavePartialView\View_LeavePartial.cshtml" />
+    <Content Include="Views\LeaveApproval\_ViewPartialPopup.cshtml" />
+    <Content Include="Views\LeaveApproval\View_LeaveApproval.cshtml" />
+    <Content Include="scripts\jquery-1.9.0.min.map" />
+    <Content Include="Views\LeaveApproval\_ViewPartialPopup2.cshtml" />
+    <Content Include="Views\EmployeeRosterStatus\Index.cshtml" />
+    <Content Include="Views\Home\ErrorPage.cshtml" />
+    <Content Include="Views\Shared\_EmployeeList.cshtml" />
+    <Content Include="Views\SpecialWeekend\View_SpecialWeekend.cshtml" />
+    <Content Include="Views\Shared\_emailTemplate.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="aspnet_client\" />
+    <Folder Include="fonts\font-awesome-4.7.0\" />
+    <Folder Include="fonts\Linearicons-Free-v1.0.0\" />
+    <Folder Include="fonts\montserrat\" />
+    <Folder Include="fonts\poppins\" />
+    <Folder Include="fonts\raleway\" />
+    <Folder Include="fonts\ubuntu\" />
+    <Folder Include="FrontEnd\build\" />
+    <Folder Include="FrontEnd\dist\" />
+    <Folder Include="FrontEnd\NewFolder1\" />
+    <Folder Include="Helper\" />
+    <Folder Include="LeaveApplicationFile\" />
+    <Folder Include="LoginDesign2\" />
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{27d6a2cb-eb98-42e2-9a74-9ad65fd9b72c}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RDLCReport\AbsentReport.rdlc" />
+    <EmbeddedResource Include="RDLCReport\AllLateReport.rdlc" />
+    <EmbeddedResource Include="RDLCReport\AllMovementReport.rdlc" />
+    <EmbeddedResource Include="RDLCReport\AllPresentReport.rdlc" />
+    <EmbeddedResource Include="RDLCReport\CombineReport.rdlc" />
+    <EmbeddedResource Include="RDLCReport\EmployeeAttendenceySummeryEmpDatatimeStatistics.rdlc" />
+    <EmbeddedResource Include="RDLCReport\EmployeeJobCard.rdlc" />
+    <EmbeddedResource Include="RDLCReport\EmployeeProfile.rdlc" />
+    <EmbeddedResource Include="Reports\Rpt_EmpMovement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_EmpMovement.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rpt_DailAttendenceAll.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DailAttendenceAll.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rpt_DailyPresentList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DailyPresentList.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rpt_DailyLateList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DailyLateList.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rpt_DailyAbsentList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DailyAbsentList.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rpt_EmployeeAttendenceSummery.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_EmployeeAttendenceSummery.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="FrontEnd\plugins\fullcalendar\main.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61637</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61637/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

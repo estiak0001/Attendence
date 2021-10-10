@@ -1,0 +1,38 @@
+﻿
+@{
+    if (Session["MenuList"] != null)
+    {
+        var UserMenuList = Session["MenuList"] as IEnumerable<BusinessLogic.Core_AccessCode2>;
+        foreach (var items in UserMenuList.Where(x => x.ParentID == "0"))
+        {
+            string action = items.ViewName;
+            string controller = items.ControllerName;
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link" style="color:#00203FFF">
+                    <i class="nav-icon @items.Icon nav-icon"></i>
+                    <p>
+                        @items.title
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav  nav-treeview" style="padding-left: 10px;" id="myTab">
+                    @foreach (var items2 in UserMenuList.Where(x => x.ParentID == items.MenuId).OrderBy(x => x.OrderBy))
+                    {
+                        <li class="nav-item">
+                            <a href="/@items2.ControllerName/@items2.ViewName" class="nav-link" style="color: #3d76ae">
+                                <i class="fas fa-minus nav-icon"></i>
+                                <p>@items2.title</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+
+        }
+    }   
+}
+
+
+
+
+
