@@ -84,6 +84,61 @@ namespace MVCPosApp.Controllers
 
             }
         }
+       
+        public ActionResult ApproveByMail(string id)
+        {
+            var Item = db.HRM_LeaveApplicationEntry.FirstOrDefault(x => x.LeaveAppEntryId == id);
+            if (Item != null)
+            {
+                if(Item.HRApprovalStatus == "Pending")
+                {
+                    Model_HRM_LeaveApplicationEntry mm = new Model_HRM_LeaveApplicationEntry();
+                    mm.LeaveAppEntryId = id;
+                    mm.HRApprovalStatus = "Approved";
+                    mm.HRApprovalRemarks = "Your Leave Approved.";
+                    crud.UpdateInfo(id, mm);
+                    return PartialView("_AlertView");
+                }
+                else
+                {
+                    return PartialView("_AlertView2");
+                }
+                
+            }
+            else
+            {
+                return PartialView("_AlertView2");
+
+            }
+        }
+        
+        public ActionResult RejectByMail(string id)
+        {
+            var Item = db.HRM_LeaveApplicationEntry.FirstOrDefault(x => x.LeaveAppEntryId == id);
+            if (Item != null)
+            {
+                if (Item.HRApprovalStatus == "Pending")
+                {
+                    Model_HRM_LeaveApplicationEntry mm = new Model_HRM_LeaveApplicationEntry();
+                    mm.LeaveAppEntryId = id;
+                    mm.HRApprovalStatus = "Cancelled";
+                    mm.HRApprovalRemarks = "Your Leave Rejected.";
+                    crud.UpdateInfo(id, mm);
+                    return PartialView("_AlertView");
+                }
+                else
+                {
+                    return PartialView("_AlertView2");
+                }
+                
+            }
+            else
+            {
+                return PartialView("_AlertView");
+
+            }
+        }
+        
         public JsonResult getSingleData(string LeaveAppEntryId)
         {
             var result = crud.GetInfo(LeaveAppEntryId);

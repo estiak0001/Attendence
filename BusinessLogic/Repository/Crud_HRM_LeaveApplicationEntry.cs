@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -172,7 +174,7 @@ namespace BusinessLogic.Repository
         }
 
 
-        public void SaveInfo(Model_HRM_LeaveApplicationEntry model, string LoginEmployeeID)
+        public string SaveInfo(Model_HRM_LeaveApplicationEntry model, string LoginEmployeeID)
         {
             string TodayDate = DateTime.Now.ToString("yyyy-MM-dd");
             DateTime StartDate = new DateTime();
@@ -220,6 +222,8 @@ namespace BusinessLogic.Repository
             
             context.HRM_LeaveApplicationEntry.Add(coreCom);
             context.SaveChanges();
+            var data =  context.Entry(coreCom).GetDatabaseValues();
+            return coreCom.LeaveAppEntryId;
         }
         public void SaveLeaveDaysInfo(HRM_LeaveApplicationDays model, string LoginEmployeeID)
         {
@@ -269,7 +273,38 @@ namespace BusinessLogic.Repository
             
             return result;
         }
-       
+
+        public void SendMailAsync(LeaveInfoMail lmodel)
+        {
+            //LeaveInfoMail models = new LeaveInfoMail();
+
+             // ToInvoice is a model, you can pass parameters if needed
+
+
+            var message = new MailMessage();
+            //message.To.Add(new MailAddress("tawfiq_islam@yahoo.com"));  
+            message.To.Add(new MailAddress("eng.estiakahmed@gmail.com"));
+            message.From = new MailAddress("gctlproject@gmail.com");
+            message.Subject = "Leave Application From " + lmodel.EmployeeNAme;
+            message.Body = lmodel.FormatString;
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "gctlproject@gmail.com",
+                    Password = "##Gctl12345##"
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+            }
+        }
+
         public Model_EmployeeBasicInfo GetEmployeeInfo(string EmployeeID)
         {
             var context = new GCTL_ERP_DB_MVC_06_27Entities();

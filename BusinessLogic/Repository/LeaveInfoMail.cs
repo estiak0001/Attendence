@@ -14,6 +14,8 @@ namespace BusinessLogic.Repository
         public string LeaveFormat { get; set; }
         public string Reason { get; set; }
         public string Messege { get; set; }
+        public string  LinkID { get; set; }
+        public string FormatString { get; set; }
 
     }
 }

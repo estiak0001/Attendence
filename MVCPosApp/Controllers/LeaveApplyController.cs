@@ -52,18 +52,18 @@ namespace MVCPosApp.Controllers
                                     }, "Value", "Text");
 
                 ViewBag.LoadEmployee = new SelectList(db.HRM_Employee.ToList().Select(u
-                              => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                              => new { FirstName = String.Format("{0}{1}{2}{3}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                       "EmployeeID", "FirstName");
 
                 var weekend = common.GetCompanyWeekend();
                 ViewBag.LoadWeekend = weekend.weekendday;
 
                 ViewBag.LoadIS = new SelectList(db.HRM_Employee.ToList().Select(u
-                               => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                               => new { FirstName = String.Format("{0}{1}{2}{3}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                       "EmployeeID", "FirstName");
 
                 ViewBag.LoadHOD = new SelectList(db.HRM_Employee.ToList().Select(u
-                               => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                               => new { FirstName = String.Format("{0}{1}{2}{3}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                       "EmployeeID", "FirstName");
                 ViewBag.LoadLeaveType = new SelectList(db.HRM_ATD_LeaveType, "LeaveTypeId", "Name");
                 common.FindMaxNoAuto(ref strMaxNO, "LeaveAppEntryId", "HRM_LeaveApplicationEntry");
@@ -89,7 +89,7 @@ namespace MVCPosApp.Controllers
                                         new Model_SelectType { Text = "Short Leave", Value = "ShortLeave"},
                                     }, "Value", "Text");
                 ViewBag.LoadEmployee = new SelectList(db.HRM_Employee.Where(a=> a.EmployeeID == employeedetails.EmployeeID).ToList().Select(u
-                              => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                              => new { FirstName = String.Format("{0}{1}{2}{3}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                       "EmployeeID", "FirstName");
 
                 var empweekend = common.GetEmployeeWeekend(empID);
@@ -104,11 +104,11 @@ namespace MVCPosApp.Controllers
                 }
 
                 ViewBag.LoadIS = new SelectList(db.HRM_Employee.Where(w=> w.EmployeeID == employeedetails.ReportingTo).ToList().Select(u
-                               => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                               => new { FirstName = String.Format("{0}{1}{2}{3}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                       "EmployeeID", "FirstName");
 
                 ViewBag.LoadHOD = new SelectList(db.HRM_Employee.Where(e=> e.EmployeeID == employeedetails.HOD).ToList().Select(u
-                               => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                               => new { FirstName = String.Format("{0}{1}{2}{3}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                       "EmployeeID", "FirstName");
                 ViewBag.LoadLeaveType = new SelectList(db.HRM_ATD_LeaveType, "LeaveTypeId", "Name");
                 common.FindMaxNoAuto(ref strMaxNO, "LeaveAppEntryId", "HRM_LeaveApplicationEntry");
@@ -117,34 +117,7 @@ namespace MVCPosApp.Controllers
                 return View();                
             }
         }
-        public void SendMailAsync(LeaveInfoMail lmodel)
-        {
-            //LeaveInfoMail models = new LeaveInfoMail();
-
-            var InvoiceHtml = RenderPartialViewToString(this, "_emailTemplate", lmodel); // ToInvoice is a model, you can pass parameters if needed
-
-
-            var message = new MailMessage();
-            message.To.Add(new MailAddress("tawfiq_islam@yahoo.com"));  // replace with valid value 
-            message.From = new MailAddress("gctlproject@gmail.com");  // replace with valid value
-            message.Subject = "Leave Application From Estiak Ahmed!";
-            message.Body = InvoiceHtml;
-            message.IsBodyHtml = true;
-
-            using (var smtp = new SmtpClient())
-            {
-                var credential = new NetworkCredential
-                {
-                    UserName = "gctlproject@gmail.com",
-                    Password = "##Gctl12345##"
-                };
-                smtp.Credentials = credential;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                smtp.Send(message);
-            }
-        }
+       
 
         public static string RenderPartialViewToString(Controller controller, string viewName, object model)
         {
@@ -167,20 +140,20 @@ namespace MVCPosApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult View_Leave(Model_HRM_LeaveApplicationEntry Model)
-        {                
+        public JsonResult View_Leave(Model_HRM_LeaveApplicationEntry Model)
+        {
             var Item = db.HRM_LeaveApplicationEntry.FirstOrDefault(x => x.LeaveAppEntryId == Model.LeaveAppEntryId);
             //var balance = db.Prc_EmployeeLeaveBalaceStatus
             if (Item == null)
             {
                 var IsApplicable = crud.ISExistLeave(Model.EmployeeID, Model.LeaveTypeId, Model.NoOfDay.ToString());
-                if(IsApplicable.status == "Yes")
+                if (IsApplicable.status == "Yes")
                 {
                     string LoginEmployeeID = Session["EmployeeID"].ToString();
-                    //crud.SaveInfo(Model, LoginEmployeeID);
+                    var Leaveid = crud.SaveInfo(Model, LoginEmployeeID);
 
                     var empInfo = crud.GetEmployeeInfo(Model.EmployeeID);
-                    
+
                     foreach (var day in Model.LeaveDaysList)
                     {
                         DateTime dateCon = new DateTime();
@@ -189,21 +162,25 @@ namespace MVCPosApp.Controllers
                         HRM_LeaveApplicationDays leaveDays = new HRM_LeaveApplicationDays();
                         leaveDays.LeaveAppEntryId = Model.LeaveAppEntryId;
                         leaveDays.days = dateCon;
-                        //crud.SaveLeaveDaysInfo(leaveDays, LoginEmployeeID);
+                        crud.SaveLeaveDaysInfo(leaveDays, LoginEmployeeID);
                     }
-                    var t = db.HRM_ATD_LeaveType.Where(x => x.LeaveTypeId == Model.LeaveTypeId).FirstOrDefault();
-                    LeaveInfoMail Leavemodels = new LeaveInfoMail();
-                    Leavemodels.Messege = "This is " + empInfo.EmployeeName + " I want to take leave from " + Model.StartDate + " to " + Model.EndDate;
-                    Leavemodels.TotalDayes = Model.NoOfDay.ToString();
-                    Leavemodels.LeaveFormat = Model.ApplyLeaveFormat == "FullLeave" ? "Full Leave" : "Short Leave";
-                    Leavemodels.LeaveType = t.Name;
-                    Leavemodels.Reason = Model.Reason;
-                    SendMailAsync(Leavemodels);
+                    //var t = db.HRM_ATD_LeaveType.Where(x => x.LeaveTypeId == Model.LeaveTypeId).FirstOrDefault();
+                    //LeaveInfoMail Leavemodels = new LeaveInfoMail();
+                    //Leavemodels.Messege = "This is " + empInfo.EmployeeName + " I want to take leave from " + Model.StartDate + " to " + Model.EndDate;
+                    //Leavemodels.TotalDayes = Model.NoOfDay.ToString();
+                    //Leavemodels.LeaveFormat = Model.ApplyLeaveFormat == "FullLeave" ? "Full Leave" : "Short Leave";
+                    //Leavemodels.LeaveType = t.Name;
+                    //Leavemodels.Reason = Model.Reason;
+                    //Leavemodels.LinkID = Leaveid;
+                    //Leavemodels.FormatString = RenderPartialViewToString(this, "_emailTemplate", Leavemodels);
+                    
+                    //crud.SendMailAsync(Leavemodels);
+
                     return Json(new { success = true, message = "Your application placed successfully." }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json(new { success = false, message = IsApplicable.leavetype + " application balance is over! You can take " + IsApplicable.Balance + " days leave."}, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, message = IsApplicable.leavetype + " application balance is over! You can take " + IsApplicable.Balance + " days leave." }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
@@ -229,8 +206,43 @@ namespace MVCPosApp.Controllers
                 {
                     return Json(new { success = false, message = "You can't update this application! This application already " + Item.HRApprovalStatus }, JsonRequestBehavior.AllowGet);
                 }
-            }       
+            }
         }
+        //[HttpPost]
+        //public async System.Threading.Tasks.Task<JsonResult> SendMailAsync(string TbNO)
+        //{
+        //    if (model != null)
+        //    {
+        //        var InvoiceHtml = RenderPartialViewToString(this, "_emailTemplate", model); // ToInvoice is a model, you can pass parameters if needed
+
+
+        //        var message = new MailMessage();
+        //        message.To.Add(new MailAddress("eng.estiakahmed@gmail.com"));
+        //        message.From = new MailAddress("estiak.eng@gmail.com");
+        //        message.Subject = "Leave Application From " + model.EmployeeNAme;
+        //        message.Body = InvoiceHtml;
+        //        message.IsBodyHtml = true;
+
+        //        using (var smtp = new SmtpClient())
+        //        {
+        //            var credential = new NetworkCredential
+        //            {
+        //                UserName = "gctlproject@gmail.com",
+        //                Password = "##Gctl12345##"
+        //            };
+        //            smtp.Credentials = credential;
+        //            smtp.Host = "smtp.gmail.com";
+        //            smtp.Port = 587;
+        //            smtp.EnableSsl = true;
+        //            await smtp.SendMailAsync(message);
+        //        }
+
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
         [HttpPost]
         public ActionResult UploadFiles()
         {

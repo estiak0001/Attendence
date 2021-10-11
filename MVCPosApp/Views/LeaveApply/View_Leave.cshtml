@@ -40,7 +40,7 @@
     textarea {
         width: 100% !important;
     }
-    .select2 {
+    /*.select2 {
         width: 100% !important;
     }
     .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
@@ -79,7 +79,7 @@
     .select2-selection:focus {
         box-shadow: 0 0 5pt 2pt #D3D3D3;
         background: #fffeed;
-    }
+    }*/
     #btnSubmit, #btnSubmit2, #btnClear, #btnDelete, #btnPrint {
         box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
         width: 100px;
@@ -228,7 +228,7 @@
         width: 100%;
         padding: 20px;
         display: none;
-        height: 269px;
+        height: 330px;
     }
 
         .calenderclass .ui-datepicker td {
@@ -266,13 +266,13 @@
         font-weight: normal;
         color: #000000;
     }*/
-    /*    .calenderclass .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
-        background: #d7ecec;
+    .calenderclass .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+        background: #e9ecef;
         font-weight: normal;
         color: #454545;
         border-radius: 16px;
         text-align: center;
-    }*/
+    }
 
     /*.calenderclass .ui-datepicker td span, .ui-datepicker td a {
         display: block;
@@ -301,14 +301,14 @@
         font-size: 12px;
     }
 
-    .form-control {
+/*    .form-control {
         display: block;
         width: 100%;
         height: calc(1.7rem + 2px);
         padding: .375rem .75rem;
         font-size: 0.8rem;
         font-weight: 400;
-        line-height: 1.5;
+        line-height: 1.8;
         color: #495057;
         background-color: #fff;
         background-clip: padding-box;
@@ -316,9 +316,11 @@
         border-radius: .25rem;
         box-shadow: inset 0 0 0 transparent;
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }*/
+
+    #ui-datepicker-div {
+        width: 292px;
     }
-
-
 
     input {
         width: 100%;
@@ -445,7 +447,7 @@
                         </div>
                     </div>
                     <div class="card-body" style="padding-left: 7px; padding-right: 8px;">
-                        <div style=" background-color: cadetblue; border-radius: 9px;">
+                        <div style=" background-color: #6c757d; border-radius: 9px;">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <span id="message"></span>
@@ -472,29 +474,29 @@
                                     <span class="RedText">&nbsp;*</span>
                                     @if (ViewBag.AccessCode != "001")
                                     {
-                                        @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "form-control", @disabled = "disabled" })
+                                        @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "form-control form-control-sm", @disabled = "disabled" })
                                     }
                                     else
                                     {
-                                        @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "form-control select2" })
+                                        @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "form-control form-control-sm select2" })
                                     }
                                 </div>
                                 <div class="col-lg-6">
                                     <label style="color: white;" for="inputName">Name</label>
                                     @*<label id="lblEmployeeName" class="form-control " style="width:100%;" />*@
-                                    <input type="text" class="form-control" readonly="readonly" id="lblEmployeeName" placeholder="Name" />
+                                    <input type="text" class="form-control form-control-sm" readonly="readonly" id="lblEmployeeName" placeholder="Name" />
                                 </div>
                             </div>
                             <div class="row inputboxPadding">
                                 <div class="col-lg-6">
                                     <label style="color: white;" for="inputName">Department</label>
                                     @*<label id="lblDepartment" class="form-control" style="width:100%;" />*@
-                                    <input type="text" class="form-control" readonly="readonly" id="lblDepartment" placeholder="Department" />
+                                    <input type="text" class="form-control form-control-sm" readonly="readonly" id="lblDepartment" placeholder="Department" />
                                 </div>
                                 <div class="col-lg-6">
                                     <label style="color: white;" for="inputName">Designation</label>
                                     @*<label id="lblDesignation" class="form-control" style="width:100%;" />*@
-                                    <input type="text" class="form-control" readonly="readonly" id="lblDesignation" placeholder="Designation" />
+                                    <input type="text" class="form-control form-control-sm" readonly="readonly" id="lblDesignation" placeholder="Designation" />
                                 </div>
                             </div>
                         </div>
@@ -504,12 +506,12 @@
                                 <div class="col-lg-6">
                                     <label for="inputName">Immediate Supervisor</label>
                                     <span class="RedText">&nbsp;*</span>
-                                    @Html.DropDownList("ddlBossEmpAutoId", (SelectList)ViewBag.LoadIS, "--Select Immediate Supervisor--", new { @class = "form-control select2", @disabled = "disabled" })
+                                    @Html.DropDownList("ddlBossEmpAutoId", (SelectList)ViewBag.LoadIS, "--Select Immediate Supervisor--", new { @class = "form-control form-control-sm", @disabled = "disabled" })
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="inputName">Head of Department</label>
                                     <span class="RedText">&nbsp;*</span>
-                                    @Html.DropDownList("ddlHOD", (SelectList)ViewBag.LoadHOD, "--Select Head of Department--", new { @class = "form-control", @disabled = "disabled" })
+                                    @Html.DropDownList("ddlHOD", (SelectList)ViewBag.LoadHOD, "--Select Head of Department--", new { @class = "form-control form-control-sm", @disabled = "disabled" })
                                 </div>
                             </div>
 
@@ -517,20 +519,20 @@
                                 <div class="col-lg-6">
                                     <label for="inputName">Apply Leave Format</label>
                                     <span class="RedText">&nbsp;*</span>
-                                    @Html.DropDownList("ddlApplyLeaveFormat", (SelectList)ViewBag.LoadLeaveFormat, "--Select Type--", new { @class = "form-control" })
+                                    @Html.DropDownList("ddlApplyLeaveFormat", (SelectList)ViewBag.LoadLeaveFormat, "--Select Leave Format--", new { @class = "form-control form-control-sm" })
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="inputName">Leave Type</label>
                                     <span class="RedText">&nbsp;*</span>
-                                    @Html.DropDownList("ddlLeaveTypeId", (SelectList)ViewBag.LoadLeaveType, "--Select Type--", new { @class = "form-control" })
+                                    @Html.DropDownList("ddlLeaveTypeId", (SelectList)ViewBag.LoadLeaveType, "--Select Leave Type--", new { @class = "form-control form-control-sm" })
                                 </div>
                             </div>
 
                             <div class="row inputboxPadding">
                                 <div class="col-lg-4">
-                                    <label for="inputName">From</label>
+                                    <label for="inputName">Date From</label>
                                     <div class="input-group date">
-                                        <input type="text" class="form-control" id="txtStartDate" placeholder="From Date" />
+                                        <input type="text" class="form-control form-control-sm" id="txtStartDate" placeholder="Date From" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-calendar"></i></div>
                                         </div>
@@ -541,7 +543,7 @@
                                 <div class="col-lg-4">
                                     <label for="inputName">To</label>
                                     <div class="input-group date">
-                                        <input type="text" class="form-control" id="txtEndDate" placeholder="To Date" />
+                                        <input type="text" class="form-control form-control-sm" id="txtEndDate" placeholder="To" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-calendar"></i></div>
                                         </div>
@@ -550,7 +552,7 @@
                                 <div class="col-lg-4">
                                     <label for="inputName">Day(s)</label>
                                     <div class="input-group date">
-                                        <input type="text" class="form-control" readonly="readonly" id="txtNoOfDay" placeholder="Total Days" />
+                                        <input type="text" class="form-control form-control-sm" readonly="readonly" id="txtNoOfDay" placeholder="Total Days" />
                                     </div>
                                 </div>
                             </div>
@@ -558,7 +560,7 @@
                                 <div class="col-lg-4">
                                     <label for="inputName">From Time</label>
                                     <div class="input-group date">
-                                        <input type="text" class="form-control timepicker" id="fromTime" />
+                                        <input type="text" class="form-control form-control-sm timepicker" id="fromTime" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                                         </div>
@@ -567,7 +569,7 @@
                                 <div class="col-lg-4">
                                     <label for="inputName">To</label>
                                     <div class="input-group date">
-                                        <input type="text" class="form-control timepicker" id="toTime" />
+                                        <input type="text" class="form-control form-control-sm timepicker" id="toTime" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                                         </div>
@@ -576,7 +578,7 @@
                                 <div class="col-lg-4">
                                     <label for="inputName">Time(s)</label>
                                     <div class="input-group date">
-                                        <input type="text" class="form-control" readonly="readonly" id="totalTime" />
+                                        <input type="text" class="form-control form-control-sm" readonly="readonly" id="totalTime" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                                         </div>
@@ -586,14 +588,14 @@
                             <div class="row inputboxPadding">
                                 <div class="col-lg-12">
                                     <label for="inputName">Reason</label>
-                                    <textarea id="txtReason" rows="3" placeholder="Reason for Leave Application."></textarea>
+                                    <textarea id="txtReason" rows="3" placeholder="Reason Entry"></textarea>
                                 </div>
                             </div>
                             <div class="row inputboxPadding">
                                 <div class="col-lg-12">
                                     <label for="inputName">File Attachment</label>
                                     <span class="RedText">&nbsp;(PDF/Word file Only)</span>
-                                    <input type="file" class="form-control" id="fileUpload" style="padding:1px" />
+                                    <input type="file" class="form-control form-control-sm" id="fileUpload" style="padding:1px" />
                                 </div>
                             </div>
                         </div>
@@ -602,7 +604,7 @@
             </div>
 
             <div class="col-md-5">
-                <div class="card card-secondary" style=" height: 380px;">
+                <div class="card card-secondary" style=" height: 367px;">
                     <div class="card-header" style="padding:0px">
                         <h5 style=" margin: 3px; text-align: center;">Leave Balance</h5>
                     </div>
@@ -626,7 +628,7 @@
                 </div>
                 <div style="">
                     <div class="card card-secondary">
-                        <div class="calenderclass" id="datepicker"></div>
+                        <div style="" class="calenderclass" id="datepicker"></div>
                     </div>
                 </div>
             </div>
@@ -636,7 +638,7 @@
                 <div class="card card-secondary" style="">
                     <div class="card-body" style=" padding: 0px; background-color: #ffffff;">
                         <div style="padding-top:15px">
-                            <table id="tblDataList" class="table table-striped  table-hover table-borderless  display" style="width:100%; font-size: 11px;">
+                            <table id="tblDataList" class="table table-sm table-striped table-responsive table-hover table-borderless  display" style="width:100%; font-size: 11px;">
                                 <thead>
                                     <tr style=" background-color: cadetblue; border-radius:50px; color:white">
                                         <th style="text-align:left;width:6%">Leave ID</th>
@@ -1026,6 +1028,9 @@
                         //    title: data.message,
                         //})
                     }
+                },
+                error: function (err) {
+                    alert(err.statusText);
                 }
             });
         });
