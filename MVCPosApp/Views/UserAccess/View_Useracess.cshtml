@@ -50,7 +50,7 @@
 
     .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
         border-color: #80bdff;
-        height: 37px !important;
+        height: 30px !important;
         width: 100% !important;
     }
 
@@ -58,14 +58,18 @@
         background-color: #fff;
         border: 1px solid #ced4da;
         border-radius: 4px;
-        height: 37px !important;
+        height: 30px !important;
         width: 100% !important;
     }
 
 
-    #btnSubmit, #btnClear, #btnDelete, #btnPrint {
+    #btnSubmit, #btnSubmit2, #btnClear, #btnDelete, #btnPrint {
         box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
         width: 100px;
+        border-radius: 20px;
+        margin-left: 5px;
+        height: 30px;
+        padding: 0px;
     }
 
     .dataTables_filter {
@@ -84,12 +88,8 @@
     }
 
     #lnkID {
-        color: #596C91;
-        background-color: #EBF0F5;
-        width: 100px;
-        border-radius: 50px;
-        height: 31px;
-        padding: 3px;
+        color: #4f4fc3;
+        font-style: normal;
     }
 
     .table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
@@ -109,6 +109,17 @@
 
     .dt-body-center {
         text-align: center;
+    }
+
+    .inputstl {
+        padding: 9px;
+        border: solid 1px #4B718B;
+        outline: 0;
+        background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #CDDBE4), to(#FFFFFF));
+        background: -moz-linear-gradient(top, #FFFFFF, #CDDBE4 1px, #FFFFFF 25px);
+        box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     }
 </style>
 
@@ -138,31 +149,12 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="card card-secondary">
-                    <div class="card-header" style="background-color:aliceblue">
-                        <i class="fas fa-save" style="font-size:20px; color:black"> User Info</i>
-                        <div class="card-tools">
-                            <div class="btn-group" style="float: right;">
-                                <div class=" col-md-3" style="border-right: 1px solid #a59191;">
-                                    <button type="button" style="border-radius:18px; width: 74px; font-size:12px; border: none; float:left; height: 25px; padding: 3px; " id="btnSubmit" class=" btn-shadow btn-wide btn btn-success waves-effect waves-light">
-                                        <span class="btn-icon-wrapper pr-3 opacity-7"><i class="fas fa-plus"></i></span>Save
-                                    </button>
-                                </div>
-                                <div class="col-md-3" style="border-right: 1px solid #a59191;">
-                                    <button type="button" style="border-radius:18px; width: 74px;  font-size:12px; border: none; height: 25px; padding: 3px; " id="btnClear" class=" btn-shadow btn-wide btn btn-default waves-effect waves-light">
-                                        <span class="btn-icon-wrapper pr-3 opacity-7"><i class="fas fa-sync"></i></span>Clearr
-                                    </button>
-                                </div>
-                                <div class="col-md-3" style="border-right: 1px solid #a59191;">
-                                    <button type="button" style="border-radius:18px; width: 74px; font-size:12px; border: none; height: 25px; padding: 3px; " id="btnDelete" class=" btn-shadow btn-wide btn btn-danger waves-effect waves-light">
-                                        <span class="btn-icon-wrapper pr-3 opacity-7"><i class="fas fa-trash"></i></span>Delete
-                                    </button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="button" style="border-radius:18px; width: 74px; font-size:12px; border: none; height: 25px; padding: 3px; " id="btnPrint" class=" btn-shadow btn-wide btn btn-dark waves-effect waves-light float-md-right">
-                                        <span class="btn-icon-wrapper pr-3 opacity-7"><i class="fas fa-print"></i></span>Print
-                                    </button>
-                                </div>
+                    <div class="card-header" style=" background-color: white; color: black; padding: 10px; font-weight: 600;">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h6>User Info</h6>
                             </div>
+                            @Html.Partial("_ActionButton")
                         </div>
                     </div>
                     <div class="card-body" style="padding-left: 7px; padding-right: 8px;">
@@ -180,21 +172,21 @@
                                 <div class="col-lg-6">
                                     <label for="inputName">Employee</label>
                                     <span class="RedText">&nbsp;*</span>
-                                    @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "selectpicker" })
+                                    @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "selectpicker form-control form-control-sm" })
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="inputName">Name</label>
-                                    <label id="lblEmployeeName" class="form-control " style="width:100%;" />
+                                    <input disabled placeholder="Employee Name"  id="lblEmployeeName" class="form-control form-control-sm  inputstl" style="width: 100%; padding: 4px; " />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="inputName">Department</label>
-                                    <label id="lblDepartment" class="form-control " style="width:100%;" />
+                                    <label id="lblDepartment" class="form-control form-control-sm inputstl" style="width: 100%; padding: 4px;" />
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="inputName">Designation</label>
-                                    <label id="lblDesignation" class="form-control " style="width:100%;" />
+                                    <label id="lblDesignation" class="form-control form-control-sm inputstl" style="width: 100%; padding: 4px;" />
                                 </div>
                             </div>
                         </div>
@@ -203,7 +195,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="inputName">User Name</label>
-                                    <input type="text" class="form-control" id="txtusername" style="width:100%">
+                                    <input type="text" class="form-control inputstl" id="txtusername" style="width:100%">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="inputName">Password</label>
@@ -291,7 +283,7 @@
 
         function Clear() {
 
-            $("#lblEmployeeName").text("");
+            $("#lblEmployeeName").val("");
             $("#lblDepartment").text("");
             $("#lblDesignation").text("");
             //Reading text box values using Jquery
@@ -464,7 +456,7 @@
                 data: { EmployeeID: EmployeeID },
                 dataType: 'json',
                 success: function (data) {
-                    $("#lblEmployeeName").text(data.EmployeeName);
+                    $("#lblEmployeeName").val(data.EmployeeName);
                     $("#lblDepartment").text(data.DepartmentCode);
                     $("#lblDesignation").text(data.DesignationCode);
                 }
@@ -487,7 +479,7 @@
             "columns": [
             {
                 "data": "EmployeeID", "render": function (data) {
-                    return "<a class='btn' id='lnkID'><i>" + data + "</i></a>"
+                    return "<a class='btn' id='lnkID'>" + data + "</a>"
                 }
             },
             { "data": "EmployeeName", "autowidth": true },

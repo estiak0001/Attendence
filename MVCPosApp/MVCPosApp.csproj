@@ -2281,6 +2281,7 @@
     <Content Include="Views\Shared\_emailTemplate.cshtml" />
     <Content Include="Views\Shared\_AlertView.cshtml" />
     <Content Include="Views\Shared\_AlertView2.cshtml" />
+    <Content Include="Views\Shared\_ActionButton.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

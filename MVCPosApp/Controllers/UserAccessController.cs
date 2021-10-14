@@ -38,7 +38,7 @@ namespace MVCPosApp.Controllers
                                 AccessCodeName = a.AccessCodeName
                             }).ToList(), "AccessCodeID", "AccessCodeName");
             ViewBag.LoadEmployee = new SelectList(db.HRM_Employee.ToList().Select(u
-                          => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, "-", u.EmployeeID), EmployeeID = u.EmployeeID }),
+                          => new { FirstName = String.Format("{0}{1}{2}", u.FirstName, " (", u.EmployeeID, ")"), EmployeeID = u.EmployeeID }),
                   "EmployeeID", "FirstName");
            
             if (id == null)

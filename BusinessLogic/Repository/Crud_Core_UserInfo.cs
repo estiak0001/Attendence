@@ -77,17 +77,13 @@ namespace BusinessLogic.Repository
                               AccessCode = psi.AccessCode,
                               password = psi.password,
                               Role = psi.Role,
-                             
-
                           }).AsEnumerable().Select(a => new Model_Core_UserInfo()
                           {
-
                               username = a.username,
                               EmployeeID =a.EmployeeID,
                               AccessCode = a.AccessCode,
                               password = a.password,
                               Role = a.Role,
-
                           }).FirstOrDefault();
             return result;
         }
